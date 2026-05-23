@@ -1,0 +1,1068 @@
+
+
+Önce kuralı sabitleyelim: **Nexora TV paneli içerik/provider/playlist satmaz ve saklamaz.** Kullanıcı kendi yetkili kaynak bilgisini uygulama içinde/local kullanır; backend sadece platform, cihaz, erişim, lisans, sürüm, destek ve operasyon verisini yönetir. Bu sınır net: ürün channel, playlist, hosted stream, third-party content veya provider access sağlamaz. 
+
+---
+
+# 1. Ana Panel Rolleri
+
+
+```txt
+Admin panel
+Reseller panel
+User panel
+```
+
+---
+
+# 2. Admin Full Yetkileri
+
+Admin panelin en geniş operasyon merkezi olacak.
+
+## 2.1 Dashboard
+
+Admin görebilir:
+
+```txt
+Toplam kullanıcı sayısı
+Toplam reseller sayısı
+Toplam cihaz sayısı
+Aktif cihaz sayısı
+Yeni kurulumlar
+Bugünkü/yeni DeviceInstallRecord kayıtları
+Aktif lisanslar
+Expired lisanslar
+Blocked lisanslar
+Trial lisanslar
+Son app version dağılımı
+Android TV / Fire TV / IOS / Android / LG / Samsung ve diğer cihaz dağılımlarıı
+Son 24 saat app açılışları
+Hatalı registration denemeleri
+Maintenance/force update durumu
+```
+
+Admin yapabilir:
+
+```txt
+Dashboard filtreleme
+Tarih aralığı seçme
+Reseller bazlı filtreleme
+Platform bazlı filtreleme
+CSV export
+```
+
+---
+
+## 2.2 Kullanıcı Yönetimi
+
+Admin yapabilir:
+
+```txt
+Kullanıcı oluşturur
+Kullanıcı görüntüler
+Kullanıcı düzenler
+Kullanıcı pasifleştirir
+Kullanıcı silmez, soft delete yapar
+Kullanıcı hesabını suspend eder
+Kullanıcı hesabını reactivate eder
+Kullanıcıyı reseller’a bağlar
+Kullanıcıyı reseller’dan ayırır
+Kullanıcıya not ekler
+Kullanıcı destek geçmişini görür
+Kullanıcı cihazlarını görür
+Kullanıcı lisanslarını görür
+Kullanıcı app access durumunu değiştirir
+```
+
+Admin görebilir:
+
+```txt
+user_id
+name
+email
+phone optional
+country optional
+timezone optional
+status
+created_at
+last_login_at
+reseller_id
+assigned_by
+notes
+```
+
+Admin görmemeli:
+
+```txt
+Provider password
+Playlist URL
+Stream URL
+Kanal listesi
+İzleme geçmişi
+```
+
+---
+
+## 2.3 Reseller Yönetimi
+
+Admin yapabilir:
+
+```txt
+Reseller oluşturur
+Reseller düzenler
+Reseller kapatır
+Reseller suspend eder
+Reseller reactivate eder
+Reseller limitlerini belirler
+Reseller’a kullanıcı bağlar
+Reseller’dan kullanıcı çıkarır
+Reseller staff oluşturur
+Reseller staff yetkilerini düzenler
+Reseller komisyon oranı tanımlar
+Reseller kredi/bakiye limiti tanımlar
+Reseller lisans üretim limitini tanımlar
+Reseller cihaz limitini tanımlar
+Reseller satış/aktivasyon geçmişini görür
+```
+
+Reseller için admin alanları:
+
+```txt
+reseller_id
+business_name
+contact_name
+email
+phone
+status
+commission_rate
+credit_balance
+credit_limit
+max_users
+max_devices
+max_active_licenses
+allowed_license_plans
+created_at
+updated_at
+```
+
+---
+
+## 2.4 Cihaz Yönetimi
+
+Admin yapabilir:
+
+```txt
+Tüm cihazları görür
+Cihaz detayını açar
+Cihazı kullanıcıya bağlar
+Cihazı kullanıcıdan ayırır
+Cihazı block eder
+Cihazı unblock eder
+Cihazı deactivate eder
+Cihaz notu ekler
+Cihaz installId görür
+Cihaz platformDeviceHash görür
+Platform bilgisini görür
+App version görür
+İlk görülme tarihini görür
+Son görülme tarihini görür
+Cihazın bağlı olduğu reseller’ı görür
+```
+
+Cihaz statüleri:
+
+```txt
+seen
+active
+inactive
+blocked
+pending_activation
+expired
+revoked
+```
+
+Admin cihazdan silmemeli:
+
+```txt
+Audit için kayıt hard delete edilmez
+Sadece soft delete / archived yapılır
+```
+
+---
+
+## 2.5 Lisans / Activation Yönetimi
+
+
+
+Admin yapabilir:
+
+```txt
+Activation key üretir
+Lisans oluşturur
+Lisansı kullanıcıya bağlar
+Lisansı cihaza bağlar
+Lisans süresini uzatır
+Lisansı iptal eder
+Lisansı block eder
+Lisansı transfer eder
+Trial lisans verir
+Lifetime lisans verir
+Monthly/yearly lisans verir
+Lisans geçmişini görür
+```
+
+Lisans statüleri:
+
+```txt
+pending
+active
+expired
+blocked
+revoked
+trial
+grace_period
+```
+
+Activation key statüleri:
+
+```txt
+unused
+claimed
+expired
+revoked
+blocked
+```
+
+Admin limitleri:
+
+```txt
+max_devices_per_license
+max_users_per_license
+license_duration_days
+starts_at
+expires_at
+grace_until
+```
+
+---
+
+## 2.6 Plan / Paket Yönetimi
+
+Admin yapabilir:
+
+```txt
+Plan oluşturur
+Plan düzenler
+Plan pasifleştirir
+Plan fiyatı belirler
+Plan cihaz limitini belirler
+Plan süresini belirler
+Trial plan oluşturur
+Reseller’a özel plan açar
+```
+
+Plan örnekleri:
+
+```txt
+Trial 7 Days
+Monthly 1 Device
+Monthly 3 Devices
+Yearly 1 Device
+Lifetime 1 Device
+Reseller Demo Plan
+```
+
+Plan alanları:
+
+```txt
+plan_id
+name
+duration_days
+max_devices
+price
+currency
+is_trial
+is_reseller_only
+status
+```
+
+---
+
+## 2.7 Ödeme / Billing Yönetimi
+
+ admin full yetki:
+
+```txt
+Ödeme kaydı görür
+Manuel payment ekler
+Refund işaretler
+Invoice görür
+Subscription durumunu görür
+Payment failed durumunu görür
+Reseller bakiye hareketlerini görür
+Kullanıcı ödeme geçmişini görür
+```
+
+Payment statüleri:
+
+```txt
+pending
+paid
+failed
+refunded
+cancelled
+chargeback
+manual_credit
+```
+
+---
+
+## 2.8 App Version / Update Yönetimi
+
+Admin yapabilir:
+
+```txt
+Yeni app version kaydı oluşturur
+Minimum desteklenen versionCode belirler
+Force update açar/kapatır
+Maintenance mode açar/kapatır
+APK download URL belirler
+Release notes ekler
+Platform bazlı update ayarı yapar
+Android TV ve Fire TV için ayrı minimum version belirler
+```
+
+Alanlar:
+
+```txt
+version_id
+platform
+version_code
+version_name
+apk_url
+is_latest
+is_required
+min_supported_version_code
+release_notes
+published_at
+```
+
+---
+
+## 2.9 Downloader / APK Link Yönetimi
+
+Admin yapabilir:
+
+```txt
+APK linkini görür
+Downloader code kaydeder
+Downloader code değiştirir
+APK dosya adını görür
+Son release APK bilgisini görür
+Download count görebilir
+```
+
+Sabit mevcut değer:
+
+```txt
+APK file: nexoratvplayer.apk
+APK URL: https://www.nexoratvplayer.com/dl/nexoratvplayer.apk
+```
+
+---
+
+## 2.10 Remote Config / Maintenance
+
+Admin yapabilir:
+
+```txt
+Maintenance mode açar
+Maintenance mesajı yazar
+Force update açar
+Soft update açar
+Feature flag açar/kapatır
+Platform bazlı config verir
+Global duyuru yayınlar
+```
+
+Config örnekleri:
+
+```txt
+maintenance_enabled
+maintenance_message
+force_update_enabled
+min_version_code_android_tv
+min_version_code_fire_tv
+support_url
+apk_url
+announcement_message
+```
+
+---
+
+## 2.11 Support / Ticket Yönetimi
+
+Admin yapabilir:
+
+```txt
+Ticket görür
+Ticket oluşturur
+Ticket cevaplar
+Ticket kapatır
+Ticket assign eder
+Ticket priority değiştirir
+Kullanıcıya not ekler
+Reseller’a not ekler
+Cihaz kaydıyla ticket bağlar
+```
+
+Ticket statüleri:
+
+```txt
+open
+pending
+waiting_user
+waiting_reseller
+resolved
+closed
+```
+
+---
+
+## 2.12 Audit Log
+
+Admin görebilir:
+
+```txt
+Kim ne yaptı
+Hangi kullanıcı değişti
+Hangi lisans değişti
+Hangi cihaz block edildi
+Hangi reseller işlem yaptı
+IP
+User agent
+Old value
+New value
+Timestamp
+---
+
+# 3. Reseller Full Yetkileri
+
+Reseller sadece kendi alanını yönetir. Global sistemi göremez.
+
+## 3.1 Reseller Dashboard
+
+Reseller görebilir:
+
+```txt
+Kendi kullanıcı sayısı
+Kendi aktif cihaz sayısı
+Kendi aktif lisans sayısı
+Kendi expired lisans sayısı
+Kendi trial lisans sayısı
+Kendi kalan kredi/bakiye
+Kendi satış/aktivasyon geçmişi
+Kendi son kurulumları
+Kendi support ticketları
+```
+
+Göremez:
+
+```txt
+Başka reseller kullanıcıları
+Global kullanıcı listesi
+Global cihaz listesi
+Global gelir
+Admin ayarları
+System settings
+```
+
+---
+
+## 3.2 Kendi Müşteri Yönetimi
+
+Reseller yapabilir:
+
+```txt
+Kendi müşterisini oluşturur
+Kendi müşterisini düzenler
+Kendi müşterisini pasifleştirir
+Kendi müşterisinin cihazlarını görür
+Kendi müşterisine lisans atar
+Kendi müşterisine activation key verir
+Kendi müşterisinin app access durumunu görür
+Kendi müşterisine not ekler
+```
+
+Reseller yapamaz:
+
+```txt
+Başka reseller müşterisini göremez
+Global kullanıcı silemez
+Admin kullanıcı oluşturamaz
+Super admin alanına erişemez
+Kendi dışındaki müşteriyi transfer edemez
+```
+
+---
+
+## 3.3 Kendi Cihaz Yönetimi
+
+Reseller yapabilir:
+
+```txt
+Kendi müşterilerine bağlı cihazları görür
+Cihazın online/last seen durumunu görür
+Cihaz app version bilgisini görür
+Cihazı kullanıcıya bağlar
+Cihazı kullanıcıdan ayırır
+Yetkisi varsa cihazı resetler
+Yetkisi varsa cihazı deactivate eder
+```
+
+Reseller genelde yapmamalı:
+
+```txt
+Cihazı global block etmek
+platformDeviceHash detayını tam görmek
+System-level device delete yapmak
+Audit log silmek
+```
+
+---
+
+## 3.4 Activation / License Yönetimi
+
+Reseller yapabilir:
+
+```txt
+Kendi limitleri içinde activation key üretir
+Kendi müşterisine lisans verir
+Kendi müşterisinin lisansını uzatır
+Kendi müşterisinin lisansını iptal eder
+Kendi müşterisine trial verebilir, yetki varsa
+Kendi lisans geçmişini görür
+```
+
+Reseller limitleri:
+
+```txt
+max_activation_keys_per_day
+max_active_users
+max_active_devices
+allowed_plan_ids
+credit_balance
+credit_limit
+can_create_trial
+can_extend_license
+can_transfer_license
+```
+
+Reseller yapamaz:
+
+```txt
+Sınırsız lisans üretemez
+Plan fiyatı değiştiremez
+Global plan oluşturamaz
+Başka reseller lisansını göremez
+Payment system ayarını değiştiremez
+```
+
+---
+
+## 3.5 Reseller Staff Yönetimi
+
+Reseller Owner yapabilir:
+
+```txt
+Kendi staff kullanıcısını oluşturur
+Staff yetkilerini düzenler
+Staff hesabını kapatır
+Staff aktivitelerini görür
+```
+
+Staff yetkileri ayrılabilir:
+
+```txt
+Müşteri görme
+Müşteri oluşturma
+Lisans verme
+Ticket cevaplama
+Cihaz görme
+Finans görme
+```
+
+---
+
+## 3.6 Reseller Billing / Bakiye
+
+Reseller görebilir:
+
+```txt
+Kendi bakiye durumu
+Kendi kredi hareketleri
+Kendi komisyonları
+Kendi lisans maliyetleri
+Kendi ödeme geçmişi
+```
+
+Reseller yapabilir:
+
+```txt
+Bakiye talebi oluşturur
+Ödeme bildirimi gönderir
+Invoice görüntüler
+```
+
+Yapamaz:
+
+```txt
+Kendi bakiyesini manuel artıramaz
+Komisyon oranını değiştiremez
+Global fiyat değiştiremez
+```
+
+---
+
+## 3.7 Reseller Support
+
+Reseller yapabilir:
+
+```txt
+Kendi müşterisi adına ticket açar
+Kendi müşterisinin ticketını görür
+Kurulum desteği verir
+Ticket’a not ekler
+```
+
+Yapamaz:
+
+```txt
+Başka reseller ticketını göremez
+Admin internal note göremez
+Global support queue göremez
+```
+
+---
+
+# 4. Kullanıcı Full Yetkileri
+
+User panel daha sade olmalı.
+
+## 4.1 User Dashboard
+
+Kullanıcı görebilir:
+
+```txt
+Kendi hesap durumu
+Kendi aktif cihazları
+Kendi app access status
+Kendi lisans bitiş tarihi
+Kendi app version bilgisi
+Güncelleme var mı
+Support durumu
+```
+
+---
+
+## 4.2 Profile
+
+Kullanıcı yapabilir:
+
+```txt
+Adını düzenler
+Email görüntüler/değiştirir, doğrulama gerekirse
+Telefon ekler/değiştirir
+Şifre değiştirir
+2FA açar/kapatır, ileride
+Dil seçer
+Timezone seçer
+Hesap silme talebi oluşturur
+```
+
+---
+
+## 4.3 Devices
+
+Kullanıcı yapabilir:
+
+```txt
+Kendi cihazlarını görür
+Cihaz adını değiştirebilir
+Cihazı hesabından kaldırabilir
+Cihaz last seen görebilir
+Cihaz platformunu görebilir
+Cihaz app version görebilir
+```
+
+Kullanıcı yapamaz:
+
+```txt
+Başka cihaz göremez
+platformDeviceHash tam değerini göremez
+Global device status değiştiremez
+Cihaz block/unblock yapamaz
+```
+
+---
+
+## 4.4 License / App Access
+
+Kullanıcı görebilir:
+
+```txt
+Aktif erişim durumu
+Bitiş tarihi
+Plan adı
+Cihaz limiti
+Activation key kullanılmış mı
+Trial durumu
+```
+
+Kullanıcı yapabilir:
+
+```txt
+Activation key redeem eder
+Lisans yenileme talebi oluşturur
+Eğer ödeme açıksa plan satın alır
+```
+
+Kullanıcı yapamaz:
+
+```txt
+Lisans üretmez
+Süre uzatmaz
+Kendi lisansını manuel active yapmaz
+Başka kullanıcı lisansı göremez
+```
+
+---
+
+## 4.5 Download / Install
+
+Kullanıcı görebilir:
+
+```txt
+APK download link
+Downloader code
+Kurulum talimatı
+Android TV talimatı
+Fire TV talimatı
+Son sürüm bilgisi
+Release notes
+```
+
+Kullanıcı yapabilir:
+
+```txt
+APK indirir
+Downloader kodunu görür
+Güncelleme talimatını takip eder
+```
+
+---
+
+## 4.6 Support
+
+Kullanıcı yapabilir:
+
+```txt
+Ticket açar
+Ticket cevaplar
+Screenshot/mesaj ekler
+Kendi ticket geçmişini görür
+```
+
+Kullanıcıdan istenmemesi gerekenler:
+
+```txt
+Provider şifresi
+Playlist URL
+Stream URL
+MAC adresi
+Kredi kartı bilgisi chat/ticket içinde
+```
+
+---
+
+# 5. Database İçin Permission Key Listesi
+
+Bunu direkt `permissions` tablosuna koyabilirsin.
+
+## Admin Permissions
+
+```txt
+admin.dashboard.view
+
+admin.users.view
+admin.users.create
+admin.users.update
+admin.users.suspend
+admin.users.reactivate
+admin.users.assign_reseller
+admin.users.notes.manage
+
+admin.resellers.view
+admin.resellers.create
+admin.resellers.update
+admin.resellers.suspend
+admin.resellers.reactivate
+admin.resellers.limits.manage
+admin.resellers.staff.manage
+
+admin.devices.view
+admin.devices.update
+admin.devices.assign_user
+admin.devices.unassign_user
+admin.devices.block
+admin.devices.unblock
+admin.devices.notes.manage
+
+admin.licenses.view
+admin.licenses.create
+admin.licenses.update
+admin.licenses.extend
+admin.licenses.revoke
+admin.licenses.transfer
+
+admin.activation_keys.view
+admin.activation_keys.create
+admin.activation_keys.revoke
+admin.activation_keys.assign
+
+admin.plans.view
+admin.plans.create
+admin.plans.update
+admin.plans.disable
+
+admin.billing.view
+admin.billing.manual_credit
+admin.billing.refund_mark
+admin.billing.invoice_view
+
+admin.app_versions.view
+admin.app_versions.create
+admin.app_versions.update
+admin.app_versions.force_update
+
+admin.remote_config.view
+admin.remote_config.update
+admin.maintenance.toggle
+
+admin.support.view
+admin.support.assign
+admin.support.reply
+admin.support.close
+
+admin.audit.view
+admin.settings.view
+admin.settings.update
+```
+
+## Reseller Permissions
+
+```txt
+reseller.dashboard.view
+
+reseller.customers.view
+reseller.customers.create
+reseller.customers.update
+reseller.customers.suspend
+reseller.customers.notes.manage
+
+reseller.devices.view
+reseller.devices.assign
+reseller.devices.unassign
+reseller.devices.rename
+reseller.devices.deactivate_request
+
+reseller.licenses.view
+reseller.licenses.create
+reseller.licenses.extend
+reseller.licenses.revoke_own
+reseller.licenses.assign_customer
+
+reseller.activation_keys.view
+reseller.activation_keys.create
+reseller.activation_keys.assign
+reseller.activation_keys.revoke_own
+
+reseller.staff.view
+reseller.staff.create
+reseller.staff.update
+reseller.staff.disable
+
+reseller.billing.view
+reseller.billing.payment_notice_create
+
+reseller.support.view
+reseller.support.create
+reseller.support.reply
+
+reseller.download.view
+```
+
+## User Permissions
+
+```txt
+user.dashboard.view
+
+user.profile.view
+user.profile.update
+user.password.change
+user.account.delete_request
+
+user.devices.view
+user.devices.rename
+user.devices.remove_own
+
+user.license.view
+user.activation_key.redeem
+user.renewal.request
+
+user.download.view
+user.release_notes.view
+
+user.support.view
+user.support.create
+user.support.reply
+```
+
+---
+
+# 6. Önerilen Database Tabloları
+
+Minimum sağlam panel DB yapısı:
+
+```txt
+users
+roles
+permissions
+role_permissions
+user_roles
+resellers
+reseller_staff
+customers
+devices
+device_install_records
+licenses
+activation_keys
+plans
+payments
+invoices
+reseller_credit_ledger
+app_versions
+remote_config
+support_tickets
+support_messages
+audit_logs
+notifications
+system_settings
+```
+
+İlişki mantığı:
+
+```txt
+users.id
+roles.id
+permissions.id
+role_permissions.role_id → roles.id
+role_permissions.permission_id → permissions.id
+user_roles.user_id → users.id
+user_roles.role_id → roles.id
+
+resellers.id
+reseller_staff.reseller_id → resellers.id
+reseller_staff.user_id → users.id
+
+customers.user_id → users.id
+customers.reseller_id → resellers.id nullable
+
+devices.user_id → users.id nullable
+devices.reseller_id → resellers.id nullable
+devices.install_id → device_install_records.installId
+
+licenses.user_id → users.id
+licenses.reseller_id → resellers.id nullable
+licenses.device_id → devices.id nullable
+licenses.plan_id → plans.id
+
+activation_keys.created_by_user_id → users.id
+activation_keys.assigned_user_id → users.id nullable
+activation_keys.reseller_id → resellers.id nullable
+activation_keys.license_id → licenses.id nullable
+
+support_tickets.user_id → users.id
+support_tickets.reseller_id → resellers.id nullable
+support_messages.ticket_id → support_tickets.id
+
+audit_logs.actor_user_id → users.id
+```
+
+---
+
+# 7. Panel Menü Tasarımı
+
+## Admin Panel Menü
+
+```txt
+Dashboard
+Users
+Resellers
+Devices
+Licenses
+Activation Keys
+Plans
+Billing
+App Versions
+Downloader / APK
+Remote Config
+Maintenance
+Support Tickets
+Audit Logs
+Notifications
+System Settings
+```
+
+## Reseller Panel Menü
+
+```txt
+Dashboard
+My Customers
+My Devices
+Licenses
+Activation Keys
+Staff
+Billing / Credits
+Download Instructions
+Support
+Account Settings
+```
+
+## User Panel Menü
+
+```txt
+Dashboard
+My Profile
+My Devices
+My License
+Download / Install
+Release Notes
+Support
+Account Settings
+```
+
+---
+
+# 8. En Önemli Güvenlik Kuralları
+
+```txt
+Admin her şeyi görebilir ama provider/playlist/stream verisi sistemde tutulmaz.
+Reseller sadece kendi müşterisini ve kendi lisanslarını görür.
+User sadece kendi hesabını, cihazını ve lisansını görür.
+Support hassas finansal ve global admin ayarlarını görmez.
+Audit log silinmez.
+Hard delete yerine soft delete kullanılır.
+Tüm kritik işlemler audit_logs tablosuna yazılır.
+API key, secret, provider password hiçbir panelde görünmez.
+```

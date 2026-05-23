@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nexora TV | IPTV Player</title>
+    <meta
+      name="description"
+      content="Nexora TV icin cihaz aktivasyonu, lisans yonetimi ve yasal kaynaklarla calisan IPTV player web sitesi."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#home" data-route="home" aria-label="Nexora TV ana sayfa">
+        <img src="./assets/nexora-icon.png" alt="" />
+        <span>NEXORA <strong>TV</strong></span>
+      </a>
+
+      <nav class="nav" aria-label="Ana gezinme">
+        <button class="nav-link is-active" data-route="home">Site</button>
+        <button class="nav-link" type="button" data-scroll-target="download">Download</button>
+        <button class="nav-link" data-route="profile">Profil</button>
+        <a class="nav-link" href="./reseller/">Reseller</a>
+      </nav>
+
+      <div class="session-pill" id="sessionPill">Cihaz bekleniyor</div>
+    </header>
+
+    <main>
+      <section class="view is-visible" id="view-home" aria-labelledby="home-title">
+        <div class="hero hero-rich">
+          <img class="hero-bg" src="./assets/nexora-bg-mark.png" alt="" />
+          <div class="hero-copy">
+            <img class="hero-logo" src="./assets/nexora-icon.png" alt="" />
+            <p class="eyebrow">Android TV ve Fire TV icin privacy-first player</p>
+            <h1 id="home-title">NEXORA TV</h1>
+            <p class="hero-lede">Kendi yetkili yayin kaynaklarini kullan. Hesap olusturmadan uygulamayi indir, TV ekranindaki cihaz koduyla profilini ac ve lisansini cihaza bagla.</p>
+            <div class="hero-actions">
+              <button class="primary-action" data-scroll-target="download">Uygulamayi Indir</button>
+              <button class="secondary-action" data-route="profile">Cihazla Giris</button>
+            </div>
+          </div>
+
+          <div class="hero-product">
+            <img src="./assets/nexora-tv-room.png" alt="Nexora TV uygulama arayuzu" />
+            <div class="hero-product-bar">
+              <span>Android TV</span>
+              <span>Fire TV</span>
+              <span>Ad-free</span>
+            </div>
+          </div>
+        </div>
+
+        <section class="signal-strip">
+          <div>
+            <strong>Player odakli</strong>
+            <span>Yayin, kanal, playlist veya provider erisimi satmaz.</span>
+          </div>
+          <div>
+            <strong>7 gun dene</strong>
+            <span>Memnun kalmadan lisans satin alma.</span>
+          </div>
+          <div>
+            <strong>Cihaza bagli</strong>
+            <span>Lisans cihaz kimligi ile eslesir.</span>
+          </div>
+        </section>
+
+        <section class="site-band site-band-tight">
+          <div class="section-heading">
+            <p class="eyebrow">Urun akisi</p>
+            <h2>Player, profil ve lisans yonetimi tek akista.</h2>
+          </div>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <span class="feature-icon">ID</span>
+              <h3>Cihazla giris</h3>
+              <p>Uygulamanin ekranda urettigi cihaz kimligi ve anahtar kodu ile profil acilir.</p>
+            </article>
+            <article class="feature-card">
+              <span class="feature-icon">DL</span>
+              <h3>Hesapsiz download</h3>
+              <p>Kullanici platformunu ve dosya tipini secer, uygulamayi dogrudan indirir.</p>
+            </article>
+            <article class="feature-card">
+              <span class="feature-icon">LC</span>
+              <h3>Lisans aktivasyonu</h3>
+              <p>Uygulamayi test ettikten sonra lisans cihaza baglanir ve panelde gorunur.</p>
+            </article>
+            <article class="feature-card">
+              <span class="feature-icon">RS</span>
+              <h3>Reseller satisi</h3>
+              <p>Bayiler kendi musterilerini ve lisanslarini ayri panelden yonetir.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="download-band" id="download">
+          <div class="download-copy">
+            <p class="eyebrow">Download</p>
+            <h2>Platformunu sec, dosya tipini sec, indir.</h2>
+            <p>Nexora TV indirme bolumu hesap olusturmadan calisir. Gercek yayin kaynaklari ve abonelik bilgileri kullanicinin kendi yasal sorumlulugundadir.</p>
+
+            <div class="segmented-group" aria-label="Platform secimi">
+              <button class="segment is-active" data-download-platform="android-tv">Android TV</button>
+              <button class="segment" data-download-platform="fire-tv">Fire TV</button>
+              <button class="segment" data-download-platform="android-mobile">Android Mobile</button>
+            </div>
+
+            <div class="segmented-group" aria-label="Dosya tipi secimi">
+              <button class="segment is-active" data-download-kind="app">Uygulama</button>
+              <button class="segment" data-download-kind="zip">ZIP Paket</button>
+            </div>
+
+            <a class="primary-action download-action" id="downloadBtn" href="./dl/nexoratvplayer-android-tv.apk" download>Download</a>
+            <p class="download-meta" id="downloadMeta">Android TV icin APK uygulama dosyasi secildi.</p>
+          </div>
+          <div class="download-art">
+            <img src="./assets/nexora-hero-space.png" alt="Nexora TV marka sahnesi" />
+            <div class="download-floating">
+              <strong>v1.0.0</strong>
+              <span>Privacy-first. Ad-free.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="split-band">
+          <div class="split-copy">
+            <p class="eyebrow">Musteri deneyimi</p>
+            <h2>TV uygulamasi ve web profili birbirini tamamlar.</h2>
+            <p>Cihazdaki uygulama kimlik ve anahtar kodu gosterir. Lisans, aktivasyon ve kaynak gonderimi web tarafinda sade bir profil akisiyle yonetilir.</p>
+            <div class="mini-steps">
+              <span>1. Uygulamayi indir</span>
+              <span>2. Cihaz kodunu gir</span>
+              <span>3. 7 gun dene</span>
+              <span>4. Memnunsan lisans al</span>
+            </div>
+          </div>
+          <div class="media-panel">
+            <img src="./assets/nexora-tv-room.png" alt="Nexora TV uygulama gorseli" />
+          </div>
+        </section>
+
+        <section class="pricing-band">
+          <div class="section-heading">
+            <p class="eyebrow">Lisans planlari</p>
+            <h2>Yayin degil, player lisansi.</h2>
+          </div>
+          <div class="pricing-grid" id="pricingGrid"></div>
+        </section>
+      </section>
+
+      <section class="view" id="view-profile" aria-labelledby="profile-title">
+        <section class="profile-gate" id="profileGate">
+          <form class="surface profile-gate-card" id="deviceLoginForm">
+            <div class="surface-heading">
+              <p class="eyebrow">Kullanici profili</p>
+              <h1 id="profile-title">Cihazla giris</h1>
+              <p>Uygulamanin TV ekraninda verdigi cihaz kimligi ve anahtar kodunu gir.</p>
+            </div>
+            <label>
+              <span>Cihaz kimligi</span>
+              <input id="deviceIdInput" name="deviceId" autocomplete="off" placeholder="NXTV-8F42-A9C1" required />
+            </label>
+            <label>
+              <span>Anahtar kodu</span>
+              <input id="deviceKeyInput" name="deviceKey" autocomplete="one-time-code" placeholder="4219-77AB" required />
+            </label>
+            <button class="primary-action full" type="submit">Giris yap</button>
+            <div class="demo-box">
+              <strong>Demo cihaz</strong>
+              <button type="button" class="text-button" id="fillDemoDevice">NXTV-8F42-A9C1 / 4219-77AB</button>
+            </div>
+          </form>
+        </section>
+
+        <div class="profile-content" id="profileContent" hidden>
+          <div class="panel-hero">
+            <div>
+              <p class="eyebrow">Kullanici profili</p>
+              <h1>Cihazini yonet ve uygulamani aktiflestir.</h1>
+            </div>
+            <button class="secondary-action" id="resetDemoBtn">Demo veriyi sifirla</button>
+          </div>
+
+          <section class="surface profile-summary">
+            <div class="surface-heading">
+              <h2>Profil ozeti</h2>
+              <p id="profileIntro">Giris yaptiktan sonra lisans, cihaz ve IPTV kaynaklari burada gorunur.</p>
+            </div>
+            <div class="status-stack" id="profileStatus"></div>
+          </section>
+
+          <div class="workspace-grid two">
+            <section class="surface" id="purchaseSurface">
+              <form id="purchaseForm">
+                <div class="surface-heading">
+                  <h2>Lisans satin al</h2>
+                  <p>Odeme entegrasyonu baglandiginda bu adim gercek tahsilata donusur.</p>
+                </div>
+                <div class="legal-notice">
+                  <strong>Yasal bilgilendirme</strong>
+                  <p>Nexora TV yalnizca medya oynatici uygulama lisansi sunar; TV kanali, yayin, IPTV aboneligi, playlist, icerik veya provider erisimi satmaz, saglamaz ya da barindirmaz. Satin alma oncesinde uygulamayi 7 gun test etmenizi oneririz. Uygulama beklentinizi karsilamiyorsa lisans satin almayin. Kullandiginiz tum kaynaklar icin gerekli yasal hak ve izinlere sahip olmak sizin sorumlulugunuzdadir. Yurutlukteki tuketici haklari ve odeme/mesafeli satis kosullari saklidir.</p>
+                  <label class="check-row">
+                    <input id="legalAcceptInput" type="checkbox" required />
+                    <span>Okudum, anladim ve kabul ediyorum.</span>
+                  </label>
+                </div>
+                <label>
+                  <span>Plan</span>
+                  <select id="planSelect"></select>
+                </label>
+                <label>
+                  <span>Reseller kodu</span>
+                  <input id="resellerCodeInput" placeholder="Istege bagli" />
+                </label>
+                <button class="primary-action full" type="submit">Lisans olustur ve aktive et</button>
+              </form>
+            </section>
+
+            <form class="surface" id="iptvForm">
+              <div class="surface-heading">
+                <h2>IPTV hesap bilgisi gonder</h2>
+                <p>Kullanicinin kendi yasal yayin kaynagi cihazdaki uygulamaya aktarilir.</p>
+              </div>
+              <label>
+                <span>Kaynak adi</span>
+                <input id="sourceNameInput" placeholder="Ev aboneligim" required />
+              </label>
+              <label>
+                <span>Portal veya M3U URL</span>
+                <input id="sourceUrlInput" type="url" placeholder="https://..." required />
+              </label>
+              <div class="form-row">
+                <label>
+                  <span>Kullanici adi</span>
+                  <input id="sourceUserInput" autocomplete="username" required />
+                </label>
+                <label>
+                  <span>Sifre</span>
+                  <input id="sourcePassInput" type="password" autocomplete="current-password" required />
+                </label>
+              </div>
+              <button class="primary-action full" type="submit">Uygulamaya gonder</button>
+            </form>
+          </div>
+
+          <section class="surface">
+            <div class="surface-heading row-heading">
+              <div>
+                <h2>Cihaz ve lisans kayitlari</h2>
+                <p>Bu bolum kullanici tarafindan gorulen aktif kayitlari gosterir.</p>
+              </div>
+              <button class="secondary-action compact" id="syncDeviceBtn">Senkronize et</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Cihaz</th>
+                    <th>Platform</th>
+                    <th>Lisans</th>
+                    <th>Bitis</th>
+                    <th>Son senkron</th>
+                  </tr>
+                </thead>
+                <tbody id="deviceTableBody"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <div class="route-loader" id="pageLoader" aria-hidden="true">
+      <div class="loader-mark"></div>
+      <span>Yukleniyor</span>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

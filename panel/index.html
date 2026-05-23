@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nexora TV Panel</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="./panel.css" />
+  </head>
+  <body class="panel-body" data-panel-mode="admin">
+    <header class="topbar panel-topbar">
+      <a class="brand" href="../index.html" aria-label="Nexora TV ana sayfa">
+        <img src="../assets/nexora-icon.png" alt="" />
+        <span>NEXORA <strong>TV</strong></span>
+      </a>
+      <div class="panel-title">Admin Paneli</div>
+      <button class="secondary-action compact" id="logoutBtn" hidden>Cikis</button>
+    </header>
+
+    <main class="panel-shell">
+      <section class="login-layout" id="loginView">
+        <div class="login-visual">
+          <img src="../assets/nexora-brand-card.png" alt="" />
+        </div>
+        <form class="surface login-card" id="panelLoginForm">
+          <div class="surface-heading">
+            <p class="eyebrow">Gizli panel</p>
+            <h1>Admin girisi</h1>
+            <p>Bu sayfa ana sitede gorunmez. Admin tum cihaz, lisans, kaynak ve reseller kayitlarini yonetir.</p>
+          </div>
+          <label>
+            <span>Erisim kodu</span>
+            <input id="accessCodeInput" placeholder="ADMIN-2026" autocomplete="one-time-code" required />
+          </label>
+          <button class="primary-action full" type="submit">Panele gir</button>
+          <div class="demo-box">
+            <strong>Demo</strong>
+            <span>Admin: ADMIN-2026</span>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel-view" id="panelView" hidden>
+        <div class="panel-hero compact-hero panel-header">
+          <div>
+            <p class="eyebrow" id="roleEyebrow">Panel</p>
+            <h1 id="panelHeading">Kayitlari yonet</h1>
+          </div>
+          <div class="session-pill strong" id="scopePill">Yetki bekleniyor</div>
+        </div>
+
+        <div class="stats-grid" id="panelStats"></div>
+
+        <section class="surface">
+          <div class="surface-heading row-heading">
+            <div>
+              <h2>Hizli lisans islemi</h2>
+              <p id="licenseFormHelp">Cihaz kimligi girerek lisans olustur.</p>
+            </div>
+            <button class="secondary-action compact" id="resetPanelDemoBtn" type="button">Demo veriyi sifirla</button>
+          </div>
+          <form class="panel-form-grid" id="licenseCreateForm">
+            <label>
+              <span>Cihaz kimligi</span>
+              <input id="panelDeviceId" placeholder="NXTV-..." required />
+            </label>
+            <label>
+              <span>Anahtar kodu</span>
+              <input id="panelDeviceKey" placeholder="Yeni cihaz icin" />
+            </label>
+            <label>
+              <span>Platform</span>
+              <select id="panelPlatform">
+                <option>Android TV</option>
+                <option>Fire TV</option>
+                <option>Musteri cihazi</option>
+              </select>
+            </label>
+            <label>
+              <span>Plan</span>
+              <select id="panelPlan"></select>
+            </label>
+            <button class="primary-action full" type="submit">Lisans olustur</button>
+          </form>
+        </section>
+
+        <section class="surface" id="resellerCreateSurface">
+          <div class="surface-heading row-heading">
+            <div>
+              <h2>Reseller olustur</h2>
+              <p>Yalnizca admin yeni bayi hesabi ve kontor tanimlayabilir.</p>
+            </div>
+          </div>
+          <form class="panel-form-grid reseller-grid" id="resellerCreateForm">
+            <label>
+              <span>Reseller adi</span>
+              <input id="newResellerName" placeholder="Bayi adi" required />
+            </label>
+            <label>
+              <span>Reseller kodu</span>
+              <input id="newResellerCode" placeholder="BAYI50" required />
+            </label>
+            <label>
+              <span>Kontor</span>
+              <input id="newResellerCredits" type="number" min="0" value="10" required />
+            </label>
+            <button class="primary-action full" type="submit">Reseller ekle</button>
+          </form>
+        </section>
+
+        <section class="surface">
+          <div class="surface-heading row-heading">
+            <div>
+              <h2>Kayitlar</h2>
+              <p id="tableHelp">Yetkine gore goruntulenebilen kayitlar listelenir.</p>
+            </div>
+            <input class="search-input" id="panelSearch" placeholder="Cihaz, lisans, reseller ara" />
+          </div>
+
+          <div class="admin-tabs" role="tablist" aria-label="Panel sekmeleri">
+            <button class="admin-tab is-active" data-panel-tab="devices">Cihazlar</button>
+            <button class="admin-tab" data-panel-tab="licenses">Lisanslar</button>
+            <button class="admin-tab" data-panel-tab="sources">IPTV kaynaklari</button>
+            <button class="admin-tab admin-only" data-panel-tab="resellers">Resellerler</button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead id="panelTableHead"></thead>
+              <tbody id="panelTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div class="toast" id="panelToast" role="status" aria-live="polite"></div>
+    <script src="./panel.js"></script>
+  </body>
+</html>
